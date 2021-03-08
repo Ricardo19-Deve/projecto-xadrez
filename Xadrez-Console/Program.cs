@@ -5,14 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using tabuleiro;
 
-namespace Xadrez_Console
+namespace xadrez_console
 {
     class Program
     {
         static void Main(string[] args)
         {
 
-            Tabuleiro tab = new Tabuleiro(8, 8);
+            Tabuleiro tab = new Tabuleiro(10, 10);
+
+            Tela.printBoard(tab);
+
 
             Console.ReadLine();
 
