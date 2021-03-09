@@ -17,14 +17,25 @@ namespace xadrez_console
         {
             try
             {
-                Tabuleiro tab = new Tabuleiro(8, 8);
+                PartidaDeXadrez partida = new PartidaDeXadrez();
+                               
 
-                tab.putPiece(new Tower(Color.Black, tab), new Posicao(0, 0));
-                tab.putPiece(new Tower(Color.Black, tab), new Posicao(1, 6));
-                tab.putPiece(new King(Color.White, tab), new Posicao(0, 2));
-                tab.putPiece(new King(Color.White, tab), new Posicao(3, 5));
+                while (!partida.terminada)
+                {
+                    Console.Clear();
+                    Tela.printBoard(partida.tab);
 
-                Tela.printBoard(tab);
+                    Console.WriteLine();
+
+                    Console.Write("Origem: ");
+                    Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
+                    Console.Write("Destino: ");
+                    Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
+
+                    partida.executaMovimento(origem, destino);
+                }
+                                         
+                
             }
             catch (BoardException e)
             {

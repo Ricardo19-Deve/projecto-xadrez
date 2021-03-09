@@ -44,6 +44,19 @@ namespace tabuleiro
             p.posicao = pos;
         }
 
+        public Piece retirarPeca (Posicao pos)
+        {
+            if ( piece(pos) == null)
+            {
+                return null;
+            }
+
+            Piece aux = piece(pos);
+            aux.posicao = null;
+            pieces[pos.linha, pos.coluna] = null;
+            return aux;
+        }
+
         public bool validePosition(Posicao pos)
         {
             if (pos.linha<0 || pos.linha>=linhas || pos.coluna<0 || pos.coluna >= colunas)

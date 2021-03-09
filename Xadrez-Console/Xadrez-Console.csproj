@@ -52,6 +52,7 @@
     <Compile Include="tabuleiro\Tabuleiro.cs" />
     <Compile Include="Tela.cs" />
     <Compile Include="xadrez\King.cs" />
+    <Compile Include="xadrez\PartidaDeXadrez.cs" />
     <Compile Include="xadrez\PosicaoXadrez.cs" />
     <Compile Include="xadrez\Tower.cs" />
   </ItemGroup>
