@@ -15,16 +15,20 @@ namespace xadrez_console
     {
         static void Main(string[] args)
         {
+            try
+            {
+                Tabuleiro tab = new Tabuleiro(8, 8);
 
-            Tabuleiro tab = new Tabuleiro(8, 8);
+                tab.putPiece(new Tower(Color.Black, tab), new Posicao(0, 0));
+                tab.putPiece(new Tower(Color.Black, tab), new Posicao(1, 9));
+                tab.putPiece(new King(Color.White, tab), new Posicao(0, 2));
 
-            tab.putPiece(new Tower(Color.Black, tab), new Posicao(0, 0));
-            tab.putPiece(new Tower(Color.Black, tab), new Posicao(1, 3));
-            tab.putPiece(new King(Color.White, tab), new Posicao(2, 4));
-
-            Tela.printBoard(tab);
-
-
+                Tela.printBoard(tab);
+            }
+            catch (BoardException e)
+            {
+                Console.WriteLine(e.Message);
+            }
             Console.ReadLine();
 
 
