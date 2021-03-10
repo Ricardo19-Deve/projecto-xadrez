@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace tabuleiro
 {
-    class Piece
+     abstract class Piece
     {
         public Posicao posicao { get; set; }
         public Color color { get; protected set; }
@@ -25,5 +25,10 @@ namespace tabuleiro
         {
             qntMovements++;
         }
+
+        public abstract bool[,] moviementosPossiveis();
+        
+
+        
     }
 }

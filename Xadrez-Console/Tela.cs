@@ -10,22 +10,16 @@ namespace xadrez_console
 {
     class Tela
     {
-        public static void printBoard (Tabuleiro tab)
+        public static void printBoard(Tabuleiro tab)
         {
-            for (int i=0; i<tab.linhas; i++)
+            for (int i = 0; i < tab.linhas; i++)
             {
                 Console.Write(8 - i + " ");
-                for (int j=0; j<tab.colunas; j++)
+                for (int j = 0; j < tab.colunas; j++)
                 {
-                    if (tab.piece(i, j)==null)
-                    {
-                        Console.Write("- ");
-                    }
-                    else
-                    {
-                        printPiece(tab.piece(i, j));
-                        Console.Write(" ");
-                    }
+
+                    printPiece(tab.piece(i, j));
+
                 }
 
                 Console.WriteLine();
@@ -33,6 +27,36 @@ namespace xadrez_console
             Console.WriteLine("  a b c d e f g h");
         }
 
+        public static void printBoard(Tabuleiro tab, bool[,] posicoesPossiveis)
+        {
+            ConsoleColor fundoOriginal = Console.BackgroundColor;
+            ConsoleColor fundoAlterado = ConsoleColor.Red;
+
+            for (int i = 0; i < tab.linhas; i++)
+            {
+                Console.Write(8 - i + " ");
+                for (int j = 0; j < tab.colunas; j++)
+                {
+
+                    if (posicoesPossiveis[i, j])
+                    {
+                        Console.BackgroundColor = fundoAlterado;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = fundoOriginal;
+                    }
+
+                    printPiece(tab.piece(i, j));
+                    Console.BackgroundColor = fundoOriginal;
+                }
+
+                Console.WriteLine();
+            }
+            Console.WriteLine("  a b c d e f g h");
+
+            Console.BackgroundColor = fundoOriginal;
+        }
         public static PosicaoXadrez lerPosicaoXadrez()
         {
             string s = Console.ReadLine();
@@ -44,17 +68,27 @@ namespace xadrez_console
 
         public static void printPiece(Piece piece)
         {
-            if ( piece.color == Color.White)
+            if (piece == null)
             {
-                Console.Write(piece);
+                Console.Write("- ");
             }
             else
             {
-                ConsoleColor aux = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write(piece);
-                Console.ForegroundColor = aux;
+
+                if (piece.color == Color.White)
+                {
+                    Console.Write(piece);
+                }
+                else
+                {
+                    ConsoleColor aux = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(piece);
+                    Console.ForegroundColor = aux;
+                }
+                Console.Write(" ");
             }
+
         }
     }
 }
