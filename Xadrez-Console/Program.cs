@@ -23,14 +23,15 @@ namespace xadrez_console
                     try
                     {
                         Console.Clear();
-                        Tela.printBoard(partida.tab);
+                        //Tela.printBoard(partida.tab);
 
-                        Console.WriteLine();
+                        //Console.WriteLine();
 
-                        Console.WriteLine("Turno: " + partida.turno);
+                        //Console.WriteLine("Turno: " + partida.turno);
 
-                        Console.WriteLine("Aguardando jogada: " + partida.jogadorAtual);
+                        //Console.WriteLine("Aguardando jogada: " + partida.jogadorAtual);
 
+                        Tela.imprimirPartida(partida);
                         Console.WriteLine();
 
                         Console.Write("Origem: ");

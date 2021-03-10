@@ -13,12 +13,17 @@ namespace xadrez
         public int turno { get; private set; }
         public Color jogadorAtual { get; private set; }
         public bool terminada { get; private set; }
+        private HashSet<Piece> pieces;
+        private HashSet<Piece> capture;
+        
 
         public PartidaDeXadrez()
         {
             tab = new Tabuleiro(8, 8);
             turno = 1;
             jogadorAtual = Color.White;
+            pieces = new HashSet<Piece>();
+            capture = new HashSet<Piece>();
             colocarPecas();
         }
 
@@ -28,6 +33,10 @@ namespace xadrez
             p.incrementarQtdMovimentos();
             Piece pecaCapturada = tab.retirarPeca(destino);
             tab.putPiece(p, destino);
+            if (pecaCapturada != null)
+            {
+                capture.Add(pecaCapturada);
+            }
         }
 
         public void realizaJogada(Posicao origem, Posicao destino)
@@ -72,21 +81,52 @@ namespace xadrez
             }
         }
 
+        public HashSet<Piece> pecasCapturadas(Color color)
+        {
+            HashSet<Piece> aux = new HashSet<Piece>();
+            foreach(Piece x in capture)
+            {
+                if (x.color == color)
+                {
+                    aux.Add(x);
+                }
+            }
+            return aux;
+        }
+        
+        public HashSet<Piece> pecasEmJogo(Color color)
+        {
+            HashSet<Piece> aux = new HashSet<Piece>();
+            foreach (Piece x in capture)
+            {
+                if (x.color == color)
+                {
+                    aux.Add(x);
+                }
+            }
+            aux.ExceptWith(pecasCapturadas(color));
+            return aux;
+        }
+        public void colocarNovaPeca(char coluna, int linha, Piece piece)
+        {
+            tab.putPiece(piece, new PosicaoXadrez(coluna, linha).toPosicao());
+            pieces.Add(piece);
+        }
         private void colocarPecas()
         {
-            tab.putPiece(new Tower(Color.White, tab), new PosicaoXadrez('c', 1).toPosicao());
-            tab.putPiece(new Tower(Color.White, tab), new PosicaoXadrez('c', 2).toPosicao());
-            tab.putPiece(new Tower(Color.White, tab), new PosicaoXadrez('d', 2).toPosicao());
-            tab.putPiece(new Tower(Color.White, tab), new PosicaoXadrez('e', 2).toPosicao());
-            tab.putPiece(new Tower(Color.White, tab), new PosicaoXadrez('e', 1).toPosicao());
-            tab.putPiece(new King(Color.White, tab), new PosicaoXadrez('d', 1).toPosicao());
+            colocarNovaPeca('c', 1, new Tower(Color.White, tab));
+            colocarNovaPeca('c', 2, new Tower(Color.White, tab));
+            colocarNovaPeca('d', 2, new Tower(Color.White, tab));
+            colocarNovaPeca('e', 2, new Tower(Color.White, tab));
+            colocarNovaPeca('e', 1, new Tower(Color.White, tab));
+            colocarNovaPeca('d', 1, new King(Color.White, tab));
 
-            tab.putPiece(new Tower(Color.Black, tab), new PosicaoXadrez('c', 7).toPosicao());
-            tab.putPiece(new Tower(Color.Black, tab), new PosicaoXadrez('c', 8).toPosicao());
-            tab.putPiece(new Tower(Color.Black, tab), new PosicaoXadrez('d', 7).toPosicao());
-            tab.putPiece(new Tower(Color.Black, tab), new PosicaoXadrez('e', 7).toPosicao());
-            tab.putPiece(new Tower(Color.Black, tab), new PosicaoXadrez('e', 8).toPosicao());
-            tab.putPiece(new King(Color.Black, tab), new PosicaoXadrez('d', 8).toPosicao());
+            colocarNovaPeca('c',7,new Tower(Color.Black, tab));
+            colocarNovaPeca('c',8,new Tower(Color.Black, tab));
+            colocarNovaPeca('d',7,new Tower(Color.Black, tab));
+            colocarNovaPeca('e',7,new Tower(Color.Black, tab));
+            colocarNovaPeca('e',8,new Tower(Color.Black, tab));
+            colocarNovaPeca('d',8,new King(Color.Black, tab));
         }
     }
 }
