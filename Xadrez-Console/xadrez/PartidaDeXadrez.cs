@@ -43,7 +43,7 @@ namespace xadrez
             return pecaCapturada;
         }
 
-        public void desfazMovimento(Posicao origem, Posicao destino,Piece pecaCapturada)
+        public void desfazMovimento(Posicao origem, Posicao destino, Piece pecaCapturada)
         {
             Piece p = tab.retirarPeca(destino);
             p.decrementarQtdMovimentos();
@@ -58,7 +58,7 @@ namespace xadrez
         {
             Piece pecaCapturada = executaMovimento(origem, destino);
 
-            if ( estaEmXeque(jogadorAtual))
+            if (estaEmXeque(jogadorAtual))
             {
                 desfazMovimento(origem, destino, pecaCapturada);
                 throw new BoardException("Você não pode se colocar em xeque!");
@@ -71,9 +71,18 @@ namespace xadrez
             {
                 xeque = false;
             }
-            turno++;
 
-            mudaJogador();
+            if (testeXequeMate(adversaria(jogadorAtual)))
+            {
+                terminada = true;
+            }
+            else
+            {
+
+                turno++;
+
+                mudaJogador();
+            }
         }
 
         public void validarPosicaoDeOrigem(Posicao pos)
@@ -176,8 +185,39 @@ namespace xadrez
                     return true;
                 }
             }
-        
+
             return false;
+        }
+
+        public bool testeXequeMate(Color color)
+        {
+            if (!estaEmXeque(color))
+            {
+                return false;
+            }
+            foreach (Piece x in pecasEmJogo(color))
+            {
+                bool[,] mat = x.moviementosPossiveis();
+                for (int i = 0; i < tab.linhas; i++)
+                {
+                    for (int j = 0; j < tab.colunas; j++)
+                    {
+                        if (mat[i, j])
+                        {
+                            Posicao origem = x.posicao;
+                            Posicao destino = new Posicao(i, j);
+                            Piece pecaCapturada = executaMovimento(origem, destino);
+                            bool testeXeque = estaEmXeque(color);
+                            desfazMovimento(origem, destino, pecaCapturada);
+                            if (!testeXeque)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
         public void colocarNovaPeca(char coluna, int linha, Piece piece)
         {
@@ -187,18 +227,18 @@ namespace xadrez
         private void colocarPecas()
         {
             colocarNovaPeca('c', 1, new Tower(Color.White, tab));
-            colocarNovaPeca('c', 2, new Tower(Color.White, tab));
-            colocarNovaPeca('d', 2, new Tower(Color.White, tab));
-            colocarNovaPeca('e', 2, new Tower(Color.White, tab));
-            colocarNovaPeca('e', 1, new Tower(Color.White, tab));
+            colocarNovaPeca('h', 7, new Tower(Color.White, tab));
             colocarNovaPeca('d', 1, new King(Color.White, tab));
+            //colocarNovaPeca('e', 2, new Tower(Color.White, tab));
+            //colocarNovaPeca('e', 1, new Tower(Color.White, tab));
+            //colocarNovaPeca('d', 1, new King(Color.White, tab));
 
-            colocarNovaPeca('c', 7, new Tower(Color.Black, tab));
-            colocarNovaPeca('c', 8, new Tower(Color.Black, tab));
-            colocarNovaPeca('d', 7, new Tower(Color.Black, tab));
-            colocarNovaPeca('e', 7, new Tower(Color.Black, tab));
-            colocarNovaPeca('e', 8, new Tower(Color.Black, tab));
-            colocarNovaPeca('d', 8, new King(Color.Black, tab));
+            //colocarNovaPeca('c', 7, new Tower(Color.Black, tab));
+            //colocarNovaPeca('c', 8, new Tower(Color.Black, tab));
+            //colocarNovaPeca('d', 7, new Tower(Color.Black, tab));
+            //colocarNovaPeca('e', 7, new Tower(Color.Black, tab));
+            colocarNovaPeca('b', 8, new Tower(Color.Black, tab));
+            colocarNovaPeca('a', 8, new King(Color.Black, tab));
         }
     }
 }
