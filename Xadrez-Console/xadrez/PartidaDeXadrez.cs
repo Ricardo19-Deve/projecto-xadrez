@@ -226,19 +226,41 @@ namespace xadrez
         }
         private void colocarPecas()
         {
-            colocarNovaPeca('c', 1, new Tower(Color.White, tab));
-            colocarNovaPeca('h', 7, new Tower(Color.White, tab));
-            colocarNovaPeca('d', 1, new King(Color.White, tab));
-            //colocarNovaPeca('e', 2, new Tower(Color.White, tab));
-            //colocarNovaPeca('e', 1, new Tower(Color.White, tab));
-            //colocarNovaPeca('d', 1, new King(Color.White, tab));
+            colocarNovaPeca('a', 2, new Peao(Color.White, tab));
+            colocarNovaPeca('b', 2, new Peao(Color.White, tab));
+            colocarNovaPeca('c', 2, new Peao(Color.White, tab));
+            colocarNovaPeca('d', 2, new Peao(Color.White, tab));
+            colocarNovaPeca('e', 2, new Peao(Color.White, tab));
+            colocarNovaPeca('f', 2, new Peao(Color.White, tab));
+            colocarNovaPeca('g', 2, new Peao(Color.White, tab));
+            colocarNovaPeca('h', 2, new Peao(Color.White, tab));
+            colocarNovaPeca('a', 1, new Tower(Color.White, tab));
+            colocarNovaPeca('b', 1, new Cavalo(Color.White, tab));
+            colocarNovaPeca('c', 1, new Bispo(Color.White, tab));
+            colocarNovaPeca('d', 1, new Dama(Color.White, tab));
+            colocarNovaPeca('e', 1, new King(Color.White, tab));
+            colocarNovaPeca('f', 1, new Bispo(Color.White, tab));
+            colocarNovaPeca('g', 1, new Cavalo(Color.White, tab));
+            colocarNovaPeca('h', 1, new Tower(Color.White, tab));
 
-            //colocarNovaPeca('c', 7, new Tower(Color.Black, tab));
-            //colocarNovaPeca('c', 8, new Tower(Color.Black, tab));
-            //colocarNovaPeca('d', 7, new Tower(Color.Black, tab));
-            //colocarNovaPeca('e', 7, new Tower(Color.Black, tab));
-            colocarNovaPeca('b', 8, new Tower(Color.Black, tab));
-            colocarNovaPeca('a', 8, new King(Color.Black, tab));
+
+            colocarNovaPeca('a', 7, new Peao(Color.Black, tab));
+            colocarNovaPeca('b', 7, new Peao(Color.Black, tab));
+            colocarNovaPeca('c', 7, new Peao(Color.Black, tab));
+            colocarNovaPeca('d', 7, new Peao(Color.Black, tab));
+            colocarNovaPeca('e', 7, new Peao(Color.Black, tab));
+            colocarNovaPeca('f', 7, new Peao(Color.Black, tab));
+            colocarNovaPeca('g', 7, new Peao(Color.Black, tab));
+            colocarNovaPeca('h', 7, new Peao(Color.Black, tab));
+            colocarNovaPeca('a', 8, new Tower(Color.Black, tab));
+            colocarNovaPeca('b', 8, new Cavalo(Color.Black, tab));
+            colocarNovaPeca('c', 8, new Bispo(Color.Black, tab));
+            colocarNovaPeca('d', 8, new Dama(Color.Black, tab));
+            colocarNovaPeca('e', 8, new King(Color.Black, tab));
+            colocarNovaPeca('f', 8, new Bispo(Color.Black, tab));
+            colocarNovaPeca('g', 8, new Cavalo(Color.Black, tab));
+            colocarNovaPeca('h', 8, new Tower(Color.Black, tab));
+
         }
     }
 }
